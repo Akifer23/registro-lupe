@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/CSS/style_lista.css">
+        <link rel="shortcut icon" href="/images/Logo.jpeg" type="image/x-icon">
+        <title>Lista de trabajadores</title>
+    </head>
+    <body>
+    <div class="container">
+        <img src="/images/lupe3.png" alt="Logo de la empresa">
+        <h1>Agregar trabajador</h1>
+        <form id="trabajadores-form">
+            <label for="nombre">Nombre del trabajador:</label>
+            <input type="text" id="nombre" name="nombre" required>
+            <label for="pago">Día de pago del trabajador</label>
+            <input type="text" id="pago" name="pago" required>
+            <label for="contraseña">Contraseña para registrar entrada</label>
+            <input type="text" id="contraseña" name="contraseña" required maxlength="10">
+            <button type="submit">Agregar</button>
+        </form>
+        <button class="regreso" onclick="Redireccion_lista()">Regresar</button>
+    </div>
+    <div class="table-container">
+        <table border="1" id="trabajadoresTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Día de Pago</th>
+                    <th>Contraseña para la entrada</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody> <!-- Los trabajadores se cargarán aquí --> </tbody>
+        </table>
+    </div>
+    <script src="/JS/script_agg.js"></script>
+</body>
+</html>

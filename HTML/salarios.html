@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/CSS/style_salarios.css">
+    <link rel="shortcut icon" href="/images/gancho.png" type="image/x-icon">
+    <title>Salarios de Esta Semana</title>
+</head>
+<body>
+    <div class="container">
+        <img src="/images/lupe3.png" alt="Logo de la empresa">
+        <h1>Salarios de Esta Semana</h1>
+        <button onclick="Redireccion_lista()">Regresar</button>
+    </div>
+    <div class="table-container">
+    <table border="1">
+        <thead>
+            <tr>
+                <th rowspan="2">Nombre</th>
+                <th rowspan="2">Horas Trabajadas</th>
+                <th colspan="2">Salario</th>
+                <th rowspan="2">Total a Pagar</th>
+                <th rowspan="2">Acciones</th>
+            </tr>
+            <tr>
+                <th>Mostrador</th>
+                <th>Caja</th>
+            </tr>
+        </thead>
+        <tbody id="salariosTableBody">
+            <!-- Aquí se cargarán los datos -->
+        </tbody>
+    </table>
+</div>
+    <script src="/JS/script_salarios.js"></script>
+</body>
+</html>

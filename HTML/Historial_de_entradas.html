@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/CSS/style_entradas.css">
+    <title>Historial de entradas</title>
+</head>
+<body>
+    <div class="container">
+        <img src="/images/lupe3.png" alt="Logo de la empresa">
+        <h1>Registro de Entradas y Salidas</h1>
+        <button onclick="Redireccion_lista()">Regresar</button>
+    </div>
+    
+    <div class="table-container">
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Fecha de Entrada</th>
+                    <th>Hora de Entrada</th>
+                    <th>Fecha y Hora de Salida</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="entradasTableBody">
+                <!-- Aquí se cargarán los datos -->
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- Formulario de edición -->
+    <div id="cardEditar" class="card" style="display: none;">
+        <div class="card-content">
+            <h2>Modificar Registro</h2>
+            <label for="editNombre">Nombre:</label>
+            <input type="text" id="editNombre" required>
+            <label for="editFecha">Fecha de Entrada:</label>
+            <input type="date" id="editFecha" required>
+            <label for="editHora">Hora de Entrada:</label>
+            <input type="time" id="editHora" required>
+            <label for="editFechaSalida">Fecha de Salida:</label>
+            <input type="date" id="editFechaSalida">
+            <label for="editHoraSalida">Hora de Salida:</label>
+            <input type="time" id="editHoraSalida">
+            <button onclick="guardarCambios()">Guardar Cambios</button>
+            <button onclick="cerrarCardEditar()">Cancelar</button>
+        </div>
+    </div>
+    
+    </div>
+
+    <script src="/JS/script_entradas.js"></script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/CSS/style_rol.css">
+    <title>Perfil del Trabajador</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Perfil del Trabajador</h1>
+        <div class="profile">
+            <label for="nombreTrabajador">Nombre:</label>
+            <select id="nombreTrabajador"></select>
+            
+            <label for="rolTrabajador">Rol Actual:</label>
+            <select id="rolTrabajador">
+                <option value="mostrador">Mostrador</option>
+                <option value="caja">Caja</option>
+            </select>
+            
+            <button onclick="guardarCambiosRol()">Guardar Cambios</button>
+        </div>
+    </div>
+    <script src="/JS/script_rol.js"></script>
+</body>
+</html>

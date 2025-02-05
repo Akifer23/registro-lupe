@@ -1,0 +1,223 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow-x: hidden; /* Evitar scroll horizontal */
+}
+
+body {
+  background: linear-gradient(0deg, #2472a2 0%, #93c8e9 50%, #ffffff 100%);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  font-family: "Raleway", serif;
+  font-optical-sizing: auto;
+  font-weight: normal;
+  font-style: normal;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  padding: 20px; /* Añadir padding para espaciado */
+}
+
+img {
+  width: 150px;
+  height: auto;
+}
+
+h1 {
+  text-align: center; /* Centra el título */
+  margin: 20px 0;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-top: -100px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #d6257d;
+  border: none;
+  width: 150px;
+  border-radius: 9px;
+  margin: 5px;
+  transition: transform 0.2s ease, background 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 4px 10px #00000065;
+  color: #FFF;
+}
+
+button:hover {
+  transform: scale(1.1);
+  background-color: #705feb;
+}
+
+button:active {
+  transform: scale(1.3);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  background-color: #5743ee;
+}
+
+/* Estilo general para la tabla */
+.table-container {
+  width: 100%;
+  overflow-x: auto; /* Permite el desplazamiento horizontal */
+  padding: 10px; /* Espaciado para que la tabla no toque los bordes */
+  margin-top: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra para destacar la tabla */
+  border-radius: 8px; /* Bordes redondeados del contenedor */
+}
+
+table {
+  width: 100%; /* Tabla ocupa todo el ancho del contenedor */
+  min-width: 700px; /* Garantiza el deslizamiento horizontal si es más pequeña */
+  border-collapse: collapse;
+  background-color: #fff;
+  font-family: "Roboto", sans-serif;
+  text-align: left;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+}
+
+th {
+  background-color: #d6257d; /* Color del encabezado */
+  color: white;
+  font-weight: bold;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9; /* Filas pares con fondo alternado */
+}
+
+tr:hover {
+  background-color: #f1f1f1; /* Efecto hover */
+  cursor: pointer;
+}
+
+td {
+  color: #333; /* Color del texto */
+}
+
+@media (max-width: 600px) {
+  table {
+    font-size: 14px; /* Ajusta el tamaño del texto para dispositivos pequeños */
+  }
+}
+
+  button {
+    font-size: 14px;
+    width: 120px;
+  }
+
+  img {
+    width: 100px;
+  }
+
+.card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 20px;
+  max-width: 500px;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.card-content h2 {
+  margin: 0 0 10px 0;
+}
+
+.card-content label {
+  font-weight: bold;
+}
+
+.card-content input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.card-content button {
+  margin-top: 10px;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromTop {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes scaleUp {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+body {
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+.container {
+  animation: slideInFromTop 1.5s ease-in-out;
+}
+
+form {
+  animation: scaleUp 1s ease-in-out 0.3s;
+  animation-fill-mode: both;
+}
+
+h1 {
+  animation: fadeIn 2s ease-in-out;
+}
+
+img {
+  animation: fadeIn 1.8s ease-in-out;
+}
+
+table {
+  animation: fadeIn 1.5s ease-in-out 0.5s;
+}

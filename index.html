@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/CSS/style.css">
+    <link rel="shortcut icon" href="/images/lupe1.jpeg" type="image/x-icon">
+    <title>Registro de entrada</title>
+</head>
+<body>
+    <div class="container">
+        <img src="/images/lupe3.png" alt="Logo de la empresa">
+    </div>
+
+    <div class="button-container">
+        <button onclick="mostrarCardRol()">Registrar entrada</button>
+        <button onclick="mostrarCardSalida()">Registrar salida</button>
+        <button onclick="window.location.href='/HTML/salarios.html'">Salarios De Esta Semana</button>
+        <button onclick="mostrarCard()">Registrar trabajadores</button>
+        <button onclick="mostrarCardContraseñaHistorial()">Historial de entradas</button>
+        <button onclick="mostrarCard2()">Historial de pagos</button>
+    </div>
+
+    <!-- Card para ingresar contraseña -->
+    <div id="cardContraseña" class="card" style="display: none;">
+        <div class="card-content">
+            <h2 style="font-family: Raleway, serif;">Ingrese su contraseña</h2>
+            <label for="inputPassword">Contraseña</label>
+            <input type="password" id="inputPassword" required>
+            <button onclick="VerificarContraseña()">Aceptar</button>
+            <button onclick="cerrarCard()">Cancelar</button>
+        </div>
+    </div>
+    <div id="cardContraseña2" class="card" style="display: none;">
+        <div class="card-content">
+            <h2 style="font-family: Raleway, serif;">Ingrese su contraseña</h2>
+            <label for="inputPassword">Contraseña</label>
+            <input type="password" id="inputPassword2" required>
+            <button onclick="Contraseña()">Aceptar</button>
+            <button onclick="cerrarCard2()">Cancelar</button>
+        </div>
+    </div>
+    <!-- Card para seleccionar el rol -->
+    <div id="cardRol" class="card" style="display:none;">
+        <div class="card-content">
+            <h2>Selecciona tu rol</h2>
+            <select id="rolSelect">
+                <option value="35">Cajero</option>
+                <option value="30">Mostrador</option>
+            </select>
+            <button onclick="continuarConContraseña()">Continuar</button>
+        </div>
+    </div>
+
+    <!-- Card de contraseña para registrar entrada -->
+    <div id="cardEntrada" class="card" style="display: none;">
+        <div class="card-content">
+            <h2>Ingresar Contraseña para Registrar Entrada</h2>
+            <label for="inputPasswordEntrada">Contraseña:</label>
+            <input type="password" id="inputPasswordEntrada" required>
+            <button onclick="verificarContraseñaEntrada()">Aceptar</button>
+            <button onclick="cerrarCardEntrada()">Cancelar</button>
+        </div>
+    </div>
+
+    <!-- Card de contraseña para registrar salida -->
+    <div id="cardSalida" class="card" style="display: none;">
+        <div class="card-content">
+            <h2>Contraseña para registrar salida</h2>
+            <label for="inputPasswordSalida">Contraseña:</label>
+            <input type="password" id="inputPasswordSalida" required>
+            <button onclick="verificarContraseñaSalida()">Registrar salida</button>
+            <button onclick="cerrarCardSalida()">Cancelar</button>
+        </div>
+    </div>
+    <!-- Card para ingresar contraseña -->
+<div id="cardContraseñaHistorial" class="card" style="display: none;">
+    <div class="card-content">
+        <h2 style="font-family: Raleway, serif;">Ingrese su contraseña</h2>
+        <label for="inputPasswordHistorial">Contraseña</label>
+        <input type="password" id="inputPasswordHistorial" required>
+        <button onclick="verificarContraseñaHistorial()">Aceptar</button>
+        <button onclick="cerrarCardContraseñaHistorial()">Cancelar</button>
+    </div>
+</div>
+    <script src="/JS/script.js"></script>
+    <script src="/JS/app.js"></script>
+</body>
+</html>
