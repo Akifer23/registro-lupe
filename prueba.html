@@ -3,179 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/CSS/style_salarios.css">
-    <link rel="shortcut icon" href="/images/gancho.png" type="image/x-icon">
-    <title>Salarios de Esta Semana</title>
+    <title>Mensaje Estilizado</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
+<style>
+    .custom-alert {
+    display: none; /* Oculta el mensaje por defecto */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #4CAF50;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    z-index: 1000;
+}
+
+.custom-alert p {
+    margin: 0 0 15px 0;
+    font-size: 18px;
+}
+
+.custom-alert button {
+    background-color: #45a049;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.custom-alert button:hover {
+    background-color: #3e8e41;
+}
+</style>
 <body>
-    <div class="container">
-        <img src="/images/Logo.jpeg" alt="Logo de la empresa">
-        <h1>Salarios de Esta Semana</h1>
-        <button onclick="Redireccion_lista()">Regresar</button>
+    <div id="custom-alert" class="custom-alert">
+        <p>Contraseña correcta, Acceso concedido</p>
+        <button id="close-alert">Cerrar</button>
     </div>
-    <div class="table-container">
-    <table border="1">
-        <thead>
-            <tr>
-                <th rowspan="2">Nombre</th>
-                <th rowspan="2">Horas Trabajadas</th>
-                <th colspan="2">Salario</th>
-                <th rowspan="2">Total a Pagar</th>
-                <th rowspan="2">Acciones</th>
-            </tr>
-            <tr>
-                <th>Mostrador</th>
-                <th>Caja</th>
-            </tr>
-        </thead>
-        <tbody id="salariosTableBody">
-            <!-- Aquí se cargarán los datos -->
-        </tbody>
-    </table>
-</div>
+
     <script>
-        // Función para redirigir a la lista principal
-function Redireccion_lista() {
-    window.location = "/index.html";
-}
+        // Mostrar el mensaje personalizado
+document.getElementById('custom-alert').style.display = 'block';
 
-function getEntradas() {
-    const entradas = JSON.parse(localStorage.getItem('entradas')) || [];
-    if (!Array.isArray(entradas)) {
-        console.error("Las entradas en localStorage no son un array.");
-        return [];
-    }
-    return entradas;
-}
-
-function getTrabajadores() {
-    const trabajadores = JSON.parse(localStorage.getItem('trabajadores')) || [];
-    if (!Array.isArray(trabajadores)) {
-        console.error("Los trabajadores en localStorage no son un array.");
-        return [];
-    }
-    return trabajadores;
-}
-function convertirFecha(fechaStr) {
-    if (!fechaStr || !fechaStr.match(/^\d{1,2}\/\d{1,2}\/\d{4}$/)) {
-        throw new Error("Formato de fecha inválido. Se esperaba 'dd/mm/yyyy'.");
-    }
-    const partes = fechaStr.split("/");
-    return new Date(partes[2], partes[1] - 1, partes[0]);
-}
-function calcularHorasTrabajadas(horaEntradaStr, horaSalidaStr) {
-    if (!horaEntradaStr || !horaSalidaStr) {
-        throw new Error("Las horas de entrada y salida son requeridas.");
-    }
-
-    const [horaEntrada, minEntrada, segEntrada] = horaEntradaStr.split(":").map(Number);
-    const [horaSalida, minSalida, segSalida] = horaSalidaStr.split(":").map(Number);
-
-    if (
-        isNaN(horaEntrada) || isNaN(minEntrada) || isNaN(segEntrada) ||
-        isNaN(horaSalida) || isNaN(minSalida) || isNaN(segSalida)
-    ) {
-        throw new Error("Formato de hora inválido. Se esperaba 'hh:mm:ss'.");
-    }
-
-    const entrada = new Date(0, 0, 0, horaEntrada, minEntrada, segEntrada);
-    const salida = new Date(0, 0, 0, horaSalida, minSalida, segSalida);
-
-    if (salida < entrada) {
-        // Maneja el caso en que la hora de salida es menor que la hora de entrada (trabajo nocturno)
-        salida.setDate(salida.getDate() + 1);
-    }
-
-    const diferenciaMs = salida - entrada;
-    const diferenciaHoras = diferenciaMs / (1000 * 60 * 60);
-
-    return Math.abs(diferenciaHoras);
-}
-function obtenerSalariosSemana() {
-    const entradas = getEntradas();
-    const salariosSemana = {};
-
-    const hoy = new Date();
-    const inicioSemana = new Date(hoy.setDate(hoy.getDate() - hoy.getDay()));
-
-    entradas.forEach(entrada => {
-        const fechaEntrada = convertirFecha(entrada.fecha);
-        if (fechaEntrada >= inicioSemana && !entrada.pagado) {
-            if (entrada.salida) {
-                const trabajadores = getTrabajadores();
-                const trabajador = trabajadores.find(t => t.id === entrada.id);
-
-                if (trabajador) {
-                    const horasTrabajadas = calcularHorasTrabajadas(entrada.hora, entrada.salida.hora);
-                    if (isNaN(entrada.tarifa)) {
-                        console.error(`Tarifa inválida para la entrada del trabajador ${trabajador.nombre}.`);
-                        return;
-                    }
-                    const salario = horasTrabajadas * entrada.tarifa;
-
-                    if (!salariosSemana[trabajador.id]) {
-                        salariosSemana[trabajador.id] = {
-                            nombre: trabajador.nombre,
-                            horasTrabajadas: 0,
-                            salario: 0
-                        };
-                    }
-                    salariosSemana[trabajador.id].horasTrabajadas += horasTrabajadas;
-                    salariosSemana[trabajador.id].salario += salario;
-                }
-            }
-        }
-    });
-
-    return Object.values(salariosSemana);
-}
-function renderizarSalarios() {
-    const salarios = obtenerSalariosSemana();
-    const tableBody = document.getElementById('salariosTableBody');
-    tableBody.innerHTML = '';
-
-    if (salarios.length === 0) {
-        tableBody.innerHTML = `<tr><td colspan="4">No hay salarios para mostrar.</td></tr>`;
-        return;
-    }
-
-    salarios.forEach(salario => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-            <td>${salario.nombre}</td>
-            <td>${salario.horasTrabajadas.toFixed(2)}</td>
-            <td>$${salario.salario.toFixed(2)}</td>
-            <td><button onclick="pagarEntrada(${salario.id})">Pagar</button></td>
-        `;
-        tableBody.appendChild(row);
-    });
-}
-function pagarEntrada(id) {
-    const entradas = getEntradas();
-    const hoy = new Date();
-    const inicioSemana = new Date(hoy.setDate(hoy.getDate() - hoy.getDay()));
-
-    let entradaPagada = false;
-
-    entradas.forEach(entrada => {
-        const fechaEntrada = convertirFecha(entrada.fecha);
-        if (entrada.id === id && fechaEntrada >= inicioSemana && !entrada.pagado) {
-            entrada.pagado = true;
-            entradaPagada = true;
-        }
-    });
-
-    if (entradaPagada) {
-        localStorage.setItem('entradas', JSON.stringify(entradas));
-        alert(`El salario ha sido pagado.`);
-        renderizarSalarios();
-    } else {
-        alert("No se encontró una entrada válida para pagar.");
-    }
-}
+// Cerrar el mensaje al hacer clic en el botón
+document.getElementById('close-alert').addEventListener('click', function() {
+    document.getElementById('custom-alert').style.display = 'none';
+});
     </script>
 </body>
 </html>

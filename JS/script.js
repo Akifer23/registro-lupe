@@ -42,26 +42,39 @@ function cerrarCardSalida() {
 }
 
 function VerificarContraseña() {
-    const inputPassword = document.getElementById('inputPassword').value;
+    const inputPassword = document.getElementById('inputPassword'); // Referencia al input
     const contraseñaCorrecta = '1';
 
-    if (inputPassword === contraseñaCorrecta) {
-        alert('Contraseña correcta, Acceso concedido');
-        cerrarCard();
+    if (inputPassword.value === contraseñaCorrecta) {
+        // Si la contraseña es correcta, redirigir
         window.location = "/HTML/Lista_de_trabajadores.html";
     } else {
-        alert('Contraseña incorrecta, Acceso denegado');
+        // Si la contraseña es incorrecta, mostrar el mensaje de error
+        document.getElementById('custom-alert').style.display = 'block';
+
+        // Cerrar el mensaje de error y limpiar el campo de contraseña
+        document.getElementById('close-alert').addEventListener('click', function () {
+            document.getElementById('custom-alert').style.display = 'none';
+            inputPassword.value = ""; // Limpiar el campo de contraseña
+        });
     }
 }
 function Contraseña() {
-    const inputPassword = document.getElementById('inputPassword2').value;
+    const inputPassword = document.getElementById('inputPassword2');
     const contraselaCorrecta ='1'
     if (inputPassword ==='Luevano09') {
         alert('contraseña correcta');
         cerrarCard();
         window.location = "/HTML/Historial_de_pagos.html";
         } else {
-            alert('contraseña incorrecta')
+           // Si la contraseña es incorrecta, mostrar el mensaje de error
+        document.getElementById('custom-alert').style.display = 'block';
+
+        // Cerrar el mensaje de error y limpiar el campo de contraseña
+        document.getElementById('close-alert').addEventListener('click', function () {
+            document.getElementById('custom-alert').style.display = 'none';
+            inputPassword.value = ""; // Limpiar el campo de contraseña
+        });
 
     }
 }
@@ -75,7 +88,7 @@ function getEntradas() {
 }
 
 function verificarContraseñaEntrada() {
-    const inputPassword = document.getElementById('inputPasswordEntrada').value;
+    const inputPassword = document.getElementById('inputPasswordEntrada');
     const trabajadores = getTrabajadores(); // Obtener todos los trabajadores
     const trabajador = trabajadores.find(t => t.contraseña === inputPassword); // Buscar al trabajador con la contraseña
 
@@ -109,12 +122,19 @@ function verificarContraseñaEntrada() {
         alert('Entrada registrada correctamente');
         cerrarCardEntrada(); // Cerrar la card
     } else {
-        alert('Contraseña incorrecta, inténtalo de nuevo.');
+         // Si la contraseña es incorrecta, mostrar el mensaje de error
+         document.getElementById('custom-alert').style.display = 'block';
+
+         // Cerrar el mensaje de error y limpiar el campo de contraseña
+         document.getElementById('close-alert').addEventListener('click', function () {
+             document.getElementById('custom-alert').style.display = 'none';
+             inputPassword.value = ""; // Limpiar el campo de contraseña
+         });
     }
 }
 
 function verificarContraseñaSalida() {
-    const inputPassword = document.getElementById('inputPasswordSalida').value;
+    const inputPassword = document.getElementById('inputPasswordSalida');
     const trabajadores = getTrabajadores(); // Obtener todos los trabajadores
     const trabajador = trabajadores.find(t => t.contraseña === inputPassword); // Buscar al trabajador con la contraseña
 
@@ -144,7 +164,14 @@ function verificarContraseñaSalida() {
             alert('Este trabajador ya registró su salida.');
         }
     } else {
-        alert('Contraseña incorrecta, inténtalo de nuevo.');
+         // Si la contraseña es incorrecta, mostrar el mensaje de error
+         document.getElementById('custom-alert').style.display = 'block';
+
+         // Cerrar el mensaje de error y limpiar el campo de contraseña
+         document.getElementById('close-alert').addEventListener('click', function () {
+             document.getElementById('custom-alert').style.display = 'none';
+             inputPassword.value = ""; // Limpiar el campo de contraseña
+         });
     }
 }
 
@@ -169,6 +196,13 @@ function verificarContraseñaHistorial() {
         // Redirigir al historial de entradas
         window.location.href = '/HTML/Historial_de_entradas.html'; // Cambia la URL según tu estructura
     } else {
-        alert("Contraseña incorrecta. Inténtelo de nuevo.");
+         // Si la contraseña es incorrecta, mostrar el mensaje de error
+         document.getElementById('custom-alert').style.display = 'block';
+
+         // Cerrar el mensaje de error y limpiar el campo de contraseña
+         document.getElementById('close-alert').addEventListener('click', function () {
+             document.getElementById('custom-alert').style.display = 'none';
+             inputPassword.value = ""; // Limpiar el campo de contraseña
+         });
     }
 }
