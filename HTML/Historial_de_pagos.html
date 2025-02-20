@@ -1,39 +1,57 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="/CSS/style_historial_de_pagos.css">
-        <link rel="shortcut icon" href="/images/lupe3.png" type="image/x-icon">
-        <title>Salarios de Esta Semana</title>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/CSS/style_salarios.css">
+    <title>Historial de Pagos</title>
+</head>
 <body>
     <div class="container">
-        <img src="/images/lupe3.png" alt="">
         <h1>Historial de Pagos</h1>
-        
-        <button class="regreso" onclick="regresar()">Regresar</button>
+        <button onclick="regresar()">Regresar</button>
     </div>
     <div class="table-container">
         <table border="1">
             <thead>
                 <tr>
                     <th>Nombre</th>
+                    <th>Fecha</th>
                     <th>Horas Trabajadas</th>
-                    <th>Salario Mostrador</th>
-                    <th>Salario Caja</th>
-                    <th>Total a Pagar</th>
-                    <th>Acciones</th>
+                    <th>Salario Pagado</th>
                 </tr>
             </thead>
             <tbody id="historialTableBody">
-                <!-- Aquí se cargarán los datos del historial -->
+                <!-- Datos del historial -->
             </tbody>
         </table>
     </div>
-    <script src="/JS/script_pagos.js"></script>
+    <script>
+        function cargarHistorial() {
+            const historial = JSON.parse(localStorage.getItem('historialPagos')) || [];
+            const tbody = document.getElementById("historialTableBody");
+            tbody.innerHTML = "";
+
+            historial.forEach(pago => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${pago.nombre}</td>
+                    <td>${pago.fecha}</td>
+                    <td>${parseFloat(pago.horasTrabajadas).toFixed(2)}</td>
+                    <td>$${parseFloat(pago.salario).toFixed(2)}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        function regresar() {
+            window.location.href = "/index.html"; // Cambia a la página principal
+        }
+
+        window.onload = cargarHistorial;
+    </script>
 </body>
 </html>

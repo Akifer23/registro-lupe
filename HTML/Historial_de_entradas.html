@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="/images/lupe1.jpeg" type="image/x-icon">
     <link rel="stylesheet" href="/CSS/style_entradas.css">
     <title>Historial de entradas</title>
@@ -15,6 +15,12 @@
         <img src="/images/lupe3.png" alt="Logo de la empresa">
         <h1>Registro de Entradas y Salidas</h1>
         <button onclick="Redireccion_lista()">Regresar</button>
+        <button onclick="exportarPDF()">Exportar en PDF</button>
+        <label for="fechaInicio">Fecha de inicio:</label>
+        <input type="date" id="fechaInicio" name="fechaInicio">
+        <label for="fechaFin">Fecha de fin:</label>
+        <input type="date" id="fechaFin" name="fechaFin">
+        <button onclick="imprimirRango()">Imprimir por Rango de Fecha</button>
     </div>
     
     <div class="table-container">
@@ -26,6 +32,7 @@
                     <th>Fecha de Entrada</th>
                     <th>Hora de Entrada</th>
                     <th>Fecha y Hora de Salida</th>
+                    <th>Descansos</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -49,13 +56,13 @@
             <input type="date" id="editFechaSalida">
             <label for="editHoraSalida">Hora de Salida:</label>
             <input type="time" id="editHoraSalida">
+            <div id="editDescansosContainer"></div>
             <button onclick="guardarCambios()">Guardar Cambios</button>
             <button onclick="cerrarCardEditar()">Cancelar</button>
         </div>
     </div>
-    
-    </div>
 
     <script src="/JS/script_entradas.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
 </body>
 </html>

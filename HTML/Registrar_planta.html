@@ -23,6 +23,10 @@
             <input type="number" id="tarifa" name="tarifa" required>
             <label for="contraseña">Contraseña para registrar entrada</label>
             <input type="text" id="contraseña" name="contraseña" required maxlength="10">
+            <label for="horaEntrada">Hora de entrada</label>
+            <input type="time" id="horaEntrada" name="horaEntrada" required>
+            <label for="horaSalida">Hora de salida</label>
+            <input type="time" id="horaSalida" name="horaSalida" required>
             <button type="submit">Agregar</button>
         </form>
         <button class="regreso" onclick="Redireccion_lista()">Regresar</button>
@@ -36,12 +40,14 @@
                     <th>Día de Pago</th>
                     <th>Tarifa por hora</th>
                     <th>Contraseña para la entrada</th>
+                    <th>Hora de entrada</th>
+                    <th>Hora de salida</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody> <!-- Los trabajadores se cargarán aquí --> </tbody>
         </table>
     </div>
-    <script src="/JS/script_agg.js"></script>
+    <script src="/JS/script_planta.js"></script>
 </body>
 </html>

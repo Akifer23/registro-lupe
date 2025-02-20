@@ -2,7 +2,7 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
-  overflow-x: hidden; /* Eliminar movimiento lateral */
+  overflow-x: hidden;
 }
 
 body {
@@ -14,7 +14,8 @@ body {
   font-optical-sizing: auto;
   font-weight: normal;
   font-style: normal;
-  overflow-x: hidden; /* Asegurar que no haya scroll lateral */
+  overflow-x: hidden;
+  animation: fadeIn 1.5s ease-in-out;
 }
 
 .container {
@@ -23,24 +24,27 @@ body {
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 20px; /* Añadir espacio interior para evitar bordes pegados */
-  box-sizing: border-box; /* Incluir padding y border en el ancho total */
-  margin: 0 auto; /* Centrar en la pantalla */
+  padding: 20px;
+  box-sizing: border-box;
+  margin: 0 auto;
+  animation: slideInFromTop 1.5s ease-in-out;
 }
 
 img, table, .container {
-  max-width: 100%; /* Asegurar que los elementos no excedan el ancho de la pantalla */
+  max-width: 100%;
 }
 
 img {
   width: 100%;
   max-width: 150px;
   height: auto;
+  animation: fadeIn 1.8s ease-in-out;
 }
 
 h1, form {
   margin-top: 20px;
   text-align: center;
+  animation: fadeIn 2s ease-in-out;
 }
 
 form {
@@ -55,6 +59,8 @@ form {
   box-shadow: 0 4px 10px #00000021;
   border-radius: 10px;
   box-sizing: border-box;
+  animation: scaleUp 1s ease-in-out 0.3s;
+  animation-fill-mode: both;
 }
 
 form label {
@@ -111,10 +117,10 @@ input {
 }
 
 .table-container {
-  overflow-x: auto; /* Habilitar scroll horizontal solo si es necesario */
+  overflow-x: auto;
   width: 100%;
-  margin: 0 auto; /* Centrar contenido */
-  padding: 20px; /* Espacio interno */
+  margin: 0 auto;
+  padding: 20px;
   box-sizing: border-box;
 }
 
@@ -130,6 +136,7 @@ table {
   border: 1px solid #541248;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 1.5s ease-in-out 0.5s;
 }
 
 /* Table header styling */
@@ -176,6 +183,7 @@ table tbody tr:last-child td {
     max-width: 95%;
   }
 }
+
 /* Añadir animaciones */
 @keyframes fadeIn {
   from {
@@ -206,30 +214,4 @@ table tbody tr:last-child td {
     transform: scale(1);
     opacity: 1;
   }
-}
-
-/* Aplicar animaciones */
-body {
-  animation: fadeIn 1.5s ease-in-out;
-}
-
-.container {
-  animation: slideInFromTop 1.5s ease-in-out;
-}
-
-form {
-  animation: scaleUp 1s ease-in-out 0.3s; /* Añadir un pequeño retraso */
-  animation-fill-mode: both; /* Mantener el estado final ok */
-}
-
-h1 {
-  animation: fadeIn 2s ease-in-out;
-}
-
-img {
-  animation: fadeIn 1.8s ease-in-out;
-}
-
-table {
-  animation: fadeIn 1.5s ease-in-out 0.5s; /* Añadir retraso para que aparezca después */
 }

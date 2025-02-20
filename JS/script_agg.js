@@ -28,6 +28,7 @@ function renderTable() {
             <td>${trabajador.id}</td>
             <td>${trabajador.nombre}</td>
             <td>${trabajador.diaPago}</td>
+            <td>${trabajador.tarifa}</td>
             <td>${trabajador.contraseña}</td>
             <td>
                 <button onclick="deleteTrabajador(${trabajador.id})">Eliminar</button>
@@ -51,6 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const nombre = document.getElementById('nombre').value;
         const diaPago = document.getElementById('pago').value;
         const contraseña = document.getElementById('contraseña').value;
+        const tarifa = document.getElementById('tarifa').value;
 
         if (contraseña.length !== 10) {
             alert('La contraseña debe tener 10 caracteres');
@@ -60,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const trabajadores = getTrabajadores();
         const id = trabajadores.length > 0 ? trabajadores[trabajadores.length - 1].id + 1 : 1;
 
-        const nuevoTrabajador = { id, nombre, diaPago, contraseña };
+        const nuevoTrabajador = { id, nombre, diaPago,tarifa, contraseña };
         trabajadores.push(nuevoTrabajador);
         saveTrabajadores(trabajadores);
         renderTable();

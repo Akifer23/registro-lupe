@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,14 +7,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/CSS/style_salarios.css">
-    <link rel="shortcut icon" href="/images/lupe1.jpeg" type="image/x-icon">
-    <title>Salarios de Esta Semana</title>
+    <title>Salarios de Trabajadores de Planta</title>
 </head>
 <body>
     <div class="container">
         <img src="/images/lupe3.png" alt="Logo de la empresa">
-        <h1>Salarios de Esta Semana</h1>
-        <button onclick="Redireccion_lista()">Regresar</button>
+        <h1>Salarios de Trabajadores de Planta</h1>
+        <button onclick="window.location.href='/index.html'">Regresar</button>
     </div>
     <div class="table-container">
         <table border="1">
@@ -22,8 +21,8 @@
                 <tr>
                     <th>Nombre</th>
                     <th>Horas Trabajadas</th>
-                    <th>Salario</th>
-                    <th>Acciones</th>
+                    <th>Horas Faltantes</th>
+                    <th>Salario Total</th>
                 </tr>
             </thead>
             <tbody id="salariosTableBody">
@@ -31,6 +30,6 @@
             </tbody>
         </table>
     </div>
-    <script src="/JS/script_salarios.js"></script>
+    <script src="/JS/salarios-planta.js"></script>
 </body>
 </html>

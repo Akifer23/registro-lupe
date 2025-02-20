@@ -1,9 +1,15 @@
 function Redireccion_lista2() {
     window.location = "/HTML/Historial_de_entradas.html";
 }
+
+function Redireccion_planta() {
+    window.location = "/HTML/Registrar_planta.html";
+}
+
 function Redireccion_rol() {
     window.location = "/HTML/cambio_de_rol.html";
 }
+
 function mostrarCard() {
     document.getElementById('cardContraseña').style.display = 'block';
 }
@@ -11,6 +17,7 @@ function mostrarCard() {
 function cerrarCard() {
     document.getElementById('cardContraseña').style.display = 'none';
 }
+
 function mostrarCard2() {
     document.getElementById('cardContraseña2').style.display = 'block';
 }
@@ -18,18 +25,17 @@ function mostrarCard2() {
 function cerrarCard2() {
     document.getElementById('cardContraseña2').style.display = 'none';
 }
+
 function mostrarCardRol() {
     document.getElementById('cardRol').style.display = 'block';
 }
 
 function continuarConContraseña() {
-    // Ocultar la card de rol y mostrar la card de entrada
     document.getElementById('cardRol').style.display = 'none';
     document.getElementById('cardEntrada').style.display = 'block';
 }
 
 function cerrarCardEntrada() {
-    // Ocultar la card de entrada
     document.getElementById('cardEntrada').style.display = 'none';
 }
 
@@ -41,41 +47,65 @@ function cerrarCardSalida() {
     document.getElementById('cardSalida').style.display = 'none';
 }
 
+function mostrarCardDescanso() {
+    document.getElementById('cardDescanso').style.display = 'block';
+}
+
+function cerrarCardDescanso() {
+    document.getElementById('cardDescanso').style.display = 'none';
+}
+
+function mostrarCardReanudar() {
+    document.getElementById('cardReanudar').style.display = 'block';
+}
+
+function cerrarCardReanudar() {
+    document.getElementById('cardReanudar').style.display = 'none';
+}
+
+function mostrarCardPlanta() {
+    document.getElementById('cardPlanta').style.display = 'block';
+}
+
+function cerrarCardPlanta() {
+    document.getElementById('cardPlanta').style.display = 'none';
+}
+
+function limpiarInput(id) {
+    document.getElementById(id).value = "";
+}
+
+document.getElementById('close-alert').addEventListener('click', function () {
+    document.getElementById('custom-alert').style.display = 'none';
+    limpiarInput('inputPassword');
+    limpiarInput('inputPassword2');
+    limpiarInput('inputPasswordEntrada');
+    limpiarInput('inputPasswordSalida');
+    limpiarInput('inputPasswordDescanso');
+    limpiarInput('inputPasswordReanudar');
+    limpiarInput('inputPasswordHistorial');
+    limpiarInput('inputPasswordPlanta');
+});
+
 function VerificarContraseña() {
-    const inputPassword = document.getElementById('inputPassword'); // Referencia al input
+    const inputPassword = document.getElementById('inputPassword').value;
     const contraseñaCorrecta = '1';
 
-    if (inputPassword.value === contraseñaCorrecta) {
-        // Si la contraseña es correcta, redirigir
+    if (inputPassword === contraseñaCorrecta) {
         window.location = "/HTML/Lista_de_trabajadores.html";
     } else {
-        // Si la contraseña es incorrecta, mostrar el mensaje de error
         document.getElementById('custom-alert').style.display = 'block';
-
-        // Cerrar el mensaje de error y limpiar el campo de contraseña
-        document.getElementById('close-alert').addEventListener('click', function () {
-            document.getElementById('custom-alert').style.display = 'none';
-            inputPassword.value = ""; // Limpiar el campo de contraseña
-        });
     }
 }
+
 function Contraseña() {
-    const inputPassword = document.getElementById('inputPassword2');
-    const contraselaCorrecta ='1'
-    if (inputPassword ==='Luevano09') {
-        alert('contraseña correcta');
-        cerrarCard();
+    const inputPassword = document.getElementById('inputPassword2').value;
+    const contraseñaCorrecta = '1';
+
+    if (inputPassword === contraseñaCorrecta) {
         window.location = "/HTML/Historial_de_pagos.html";
-        } else {
-           // Si la contraseña es incorrecta, mostrar el mensaje de error
+    } else {
         document.getElementById('custom-alert').style.display = 'block';
-
-        // Cerrar el mensaje de error y limpiar el campo de contraseña
-        document.getElementById('close-alert').addEventListener('click', function () {
-            document.getElementById('custom-alert').style.display = 'none';
-            inputPassword.value = ""; // Limpiar el campo de contraseña
-        });
-
     }
 }
 
@@ -87,122 +117,156 @@ function getEntradas() {
     return JSON.parse(localStorage.getItem('entradas')) || [];
 }
 
+function getTodosLosTrabajadores() {
+    const trabajadores = JSON.parse(localStorage.getItem('trabajadores')) || [];
+    const trabajadoresPlanta = JSON.parse(localStorage.getItem('trabajadores-planta')) || [];
+    return [...trabajadores, ...trabajadoresPlanta];
+}
+
 function verificarContraseñaEntrada() {
-    const inputPassword = document.getElementById('inputPasswordEntrada');
-    const trabajadores = getTrabajadores(); // Obtener todos los trabajadores
-    const trabajador = trabajadores.find(t => t.contraseña === inputPassword); // Buscar al trabajador con la contraseña
+    const inputPassword = document.getElementById('inputPasswordEntrada').value;
+    const trabajadores = getTodosLosTrabajadores();
+    const trabajador = trabajadores.find(t => t.contraseña === inputPassword);
 
     if (trabajador) {
         const rolSelect = document.getElementById('rolSelect');
-        const tarifa = parseFloat(rolSelect.value);
         const rol = rolSelect.options[rolSelect.selectedIndex].text.split(' ')[0].toLowerCase();
-
-        // Capturar la hora y fecha actual
         const fechaHora = new Date();
-        const fecha = fechaHora.toLocaleDateString(); // Fecha en formato local
-        const hora = fechaHora.toLocaleTimeString(); // Hora en formato local
-        
-        // Crear un objeto con la entrada registrada
+        const fecha = fechaHora.toLocaleDateString();
+        const hora = fechaHora.toLocaleTimeString();
+
         const entrada = {
-            id: trabajador.id,
+            id: Date.now(),
+            idTrabajador: trabajador.id,
             nombre: trabajador.nombre,
             fecha,
             hora,
             rol,
-            tarifa,
             salida: null,
-            pagado: false
+            pagado: false,
+            descansos: []
         };
 
-        // Guardar en localStorage
         const entradas = getEntradas();
         entradas.push(entrada);
         localStorage.setItem('entradas', JSON.stringify(entradas));
 
         alert('Entrada registrada correctamente');
-        cerrarCardEntrada(); // Cerrar la card
+        cerrarCardEntrada();
     } else {
-         // Si la contraseña es incorrecta, mostrar el mensaje de error
-         document.getElementById('custom-alert').style.display = 'block';
-
-         // Cerrar el mensaje de error y limpiar el campo de contraseña
-         document.getElementById('close-alert').addEventListener('click', function () {
-             document.getElementById('custom-alert').style.display = 'none';
-             inputPassword.value = ""; // Limpiar el campo de contraseña
-         });
+        document.getElementById('custom-alert').style.display = 'block';
     }
 }
 
 function verificarContraseñaSalida() {
-    const inputPassword = document.getElementById('inputPasswordSalida');
-    const trabajadores = getTrabajadores(); // Obtener todos los trabajadores
-    const trabajador = trabajadores.find(t => t.contraseña === inputPassword); // Buscar al trabajador con la contraseña
+    const inputPassword = document.getElementById('inputPasswordSalida').value;
+    const trabajadores = getTodosLosTrabajadores();
+    const trabajador = trabajadores.find(t => t.contraseña === inputPassword);
 
     if (trabajador) {
-        // Capturar la hora y fecha actual
         const fechaHora = new Date();
-        const fecha = fechaHora.toLocaleDateString(); // Fecha en formato local
-        const hora = fechaHora.toLocaleTimeString(); // Hora en formato local
-        
-        // Buscar la entrada de este trabajador para registrar la salida
+        const fecha = fechaHora.toLocaleDateString();
+        const hora = fechaHora.toLocaleTimeString();
         const entradas = getEntradas();
-        const entrada = entradas.find(e => e.id === trabajador.id && !e.salida); // Verificar que no haya salida aún
+        const entrada = entradas.find(e => e.idTrabajador === trabajador.id && !e.salida);
 
         if (entrada) {
-            // Actualizar la entrada con la hora de salida
-            entrada.salida = {
-                fecha,
-                hora
-            };
-
-            // Guardar las entradas actualizadas
+            entrada.salida = { fecha, hora };
             localStorage.setItem('entradas', JSON.stringify(entradas));
 
             alert('Salida registrada correctamente');
-            cerrarCardSalida(); // Cerrar la card
+            cerrarCardSalida();
         } else {
             alert('Este trabajador ya registró su salida.');
         }
     } else {
-         // Si la contraseña es incorrecta, mostrar el mensaje de error
-         document.getElementById('custom-alert').style.display = 'block';
-
-         // Cerrar el mensaje de error y limpiar el campo de contraseña
-         document.getElementById('close-alert').addEventListener('click', function () {
-             document.getElementById('custom-alert').style.display = 'none';
-             inputPassword.value = ""; // Limpiar el campo de contraseña
-         });
+        document.getElementById('custom-alert').style.display = 'block';
     }
 }
 
-// Función para mostrar la tarjeta de contraseña del historial
-function mostrarCardContraseñaHistorial() {
-    const card = document.getElementById('cardContraseñaHistorial');
-    card.style.display = 'block';
-}
+function verificarContraseñaDescanso() {
+    const inputPassword = document.getElementById('inputPasswordDescanso').value;
+    const trabajadores = getTodosLosTrabajadores();
+    const trabajador = trabajadores.find(t => t.contraseña === inputPassword);
 
-// Función para cerrar la tarjeta de contraseña del historial
-function cerrarCardContraseñaHistorial() {
-    const card = document.getElementById('cardContraseñaHistorial');
-    card.style.display = 'none';
-}
+    if (trabajador) {
+        const fechaHora = new Date();
+        const fecha = fechaHora.toLocaleDateString();
+        const hora = fechaHora.toLocaleTimeString();
+        const entradas = getEntradas();
+        const entrada = entradas.find(e => e.idTrabajador === trabajador.id && !e.salida);
 
-// Función para verificar la contraseña del historial
-function verificarContraseñaHistorial() {
-    const contraseñaIngresada = document.getElementById('inputPasswordHistorial').value;
-    const contraseñaCorrecta = "Luevano09"; // Cambia esto por tu contraseña real
+        if (entrada) {
+            entrada.descansos.push({ inicio: { fecha, hora }, fin: null });
+            localStorage.setItem('entradas', JSON.stringify(entradas));
 
-    if (contraseñaIngresada === contraseñaCorrecta) {
-        // Redirigir al historial de entradas
-        window.location.href = '/HTML/Historial_de_entradas.html'; // Cambia la URL según tu estructura
+            alert('Descanso registrado correctamente');
+            cerrarCardDescanso();
+        } else {
+            alert('Este trabajador ya registró su salida.');
+        }
     } else {
-         // Si la contraseña es incorrecta, mostrar el mensaje de error
-         document.getElementById('custom-alert').style.display = 'block';
+        document.getElementById('custom-alert').style.display = 'block';
+    }
+}
 
-         // Cerrar el mensaje de error y limpiar el campo de contraseña
-         document.getElementById('close-alert').addEventListener('click', function () {
-             document.getElementById('custom-alert').style.display = 'none';
-             inputPassword.value = ""; // Limpiar el campo de contraseña
-         });
+function verificarContraseñaReanudar() {
+    const inputPassword = document.getElementById('inputPasswordReanudar').value;
+    const trabajadores = getTodosLosTrabajadores();
+    const trabajador = trabajadores.find(t => t.contraseña === inputPassword);
+
+    if (trabajador) {
+        const fechaHora = new Date();
+        const fecha = fechaHora.toLocaleDateString();
+        const hora = fechaHora.toLocaleTimeString();
+        const entradas = getEntradas();
+        const entrada = entradas.find(e => e.idTrabajador === trabajador.id && !e.salida);
+
+        if (entrada) {
+            const descanso = entrada.descansos.find(d => d.fin === null);
+            if (descanso) {
+                descanso.fin = { fecha, hora };
+                localStorage.setItem('entradas', JSON.stringify(entradas));
+
+                alert('Reanudación de jornada registrada correctamente');
+                cerrarCardReanudar();
+            } else {
+                alert('No se encontró un descanso en curso para este trabajador.');
+            }
+        } else {
+            alert('Este trabajador ya registró su salida.');
+        }
+    } else {
+        document.getElementById('custom-alert').style.display = 'block';
+    }
+}
+
+function verificarContraseñaPlanta() {
+    const inputPassword = document.getElementById('inputPasswordPlanta').value;
+    const contraseñaCorrecta = '1';
+
+    if (inputPassword === contraseñaCorrecta) {
+        window.location = "/HTML/Registrar_planta.html";
+    } else {
+        document.getElementById('custom-alert').style.display = 'block';
+    }
+}
+
+function mostrarCardContraseñaHistorial() {
+    document.getElementById('cardContraseñaHistorial').style.display = 'block';
+}
+
+function cerrarCardContraseñaHistorial() {
+    document.getElementById('cardContraseñaHistorial').style.display = 'none';
+}
+
+function verificarContraseñaHistorial() {
+    const inputPassword = document.getElementById('inputPasswordHistorial').value;
+    const contraseñaCorrecta = "1";
+
+    if (inputPassword === contraseñaCorrecta) {
+        window.location.href = '/HTML/Historial_de_entradas.html';
+    } else {
+        document.getElementById('custom-alert').style.display = 'block';
     }
 }

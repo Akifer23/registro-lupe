@@ -6,53 +6,88 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900&family=Material+Icons&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/CSS/style.css">
     <link rel="shortcut icon" href="/images/lupe1.jpeg" type="image/x-icon">
     <title>Registro de entrada</title>
 </head>
 <body>
     <div class="container">
-        <img src="/images/lupe3.png" alt="Logo de la empresa">
+        <img src="/images/lupe3.png" alt="Logo de la empresa" class="logo">
     </div>
 
     <div class="button-container">
-        <button onclick="mostrarCardRol()">Registrar entrada</button>
-        <button onclick="mostrarCardSalida()">Registrar salida</button>
-        <button onclick="window.location.href='/HTML/salarios.html'">Salarios De Esta Semana</button>
-        <button onclick="mostrarCard()">Registrar trabajadores</button>
-        <button onclick="mostrarCardContraseñaHistorial()">Historial de entradas</button>
-        <button onclick="mostrarCard2()">Historial de pagos</button>
+        <button class="main-button" onclick="mostrarCardRol()">
+            <span class="material-icons">login</span>
+            Registrar entrada
+        </button>
+        <button class="main-button" onclick="mostrarCardDescanso()">
+            <span class="material-icons">pause</span>
+            Tomar descanso
+        </button>
+        <button class="main-button" onclick="mostrarCardReanudar()">
+            <span class="material-icons">play_arrow</span>
+            Reanudar jornada
+        </button>
+        <button class="main-button" onclick="mostrarCardSalida()">
+            <span class="material-icons">logout</span>
+            Registrar salida
+        </button>
+        <button class="main-button" onclick="window.location.href='/HTML/salarios.html'">
+            <span class="material-icons">attach_money</span>
+            Salarios por hora
+        </button>
+        <button class="main-button" onclick="window.location.href='/HTML/salarios_planta.html'">
+            <span class="material-icons">account_balance</span>
+            Salarios de planta
+        </button>
+        <button class="main-button" onclick="mostrarCard()">
+            <span class="material-icons">person_add</span>
+            Registrar trabajadores por hora
+        </button>
+        <button class="main-button" onclick="mostrarCardPlanta()">
+            <span class="material-icons">group_add</span>
+            Registrar trabajadores de planta
+        </button>
+        <button class="main-button" onclick="mostrarCardContraseñaHistorial()">
+            <span class="material-icons">history</span>
+            Historial de entradas
+        </button>
+        <button class="main-button" onclick="mostrarCard2()">
+            <span class="material-icons">payment</span>
+            Historial de pagos
+        </button>
     </div>
 
     <!-- Card para ingresar contraseña -->
     <div id="cardContraseña" class="card" style="display: none;">
         <div class="card-content">
-            <h2 style="font-family: Raleway, serif;">Ingrese su contraseña</h2>
+            <h2>Ingrese su contraseña</h2>
             <label for="inputPassword">Contraseña</label>
             <input type="password" id="inputPassword" required>
-            <button onclick="VerificarContraseña()">Aceptar</button>
-            <button onclick="cerrarCard()">Cancelar</button>
+            <button class="action-button" onclick="VerificarContraseña()">Aceptar</button>
+            <button class="action-button cancel" onclick="cerrarCard()">Cancelar</button>
         </div>
     </div>
+    <!-- Card para ingresar segunda contraseña -->
     <div id="cardContraseña2" class="card" style="display: none;">
         <div class="card-content">
-            <h2 style="font-family: Raleway, serif;">Ingrese su contraseña</h2>
-            <label for="inputPassword">Contraseña</label>
+            <h2>Ingrese su contraseña</h2>
+            <label for="inputPassword2">Contraseña</label>
             <input type="password" id="inputPassword2" required>
-            <button onclick="Contraseña()">Aceptar</button>
-            <button onclick="cerrarCard2()">Cancelar</button>
+            <button class="action-button" onclick="Contraseña()">Aceptar</button>
+            <button class="action-button cancel" onclick="cerrarCard2()">Cancelar</button>
         </div>
     </div>
     <!-- Card para seleccionar el rol -->
-    <div id="cardRol" class="card" style="display:none;">
+    <div id="cardRol" class="card" style="display: none;">
         <div class="card-content">
             <h2>Selecciona tu rol</h2>
             <select id="rolSelect">
                 <option value="35">Cajero</option>
                 <option value="30">Mostrador</option>
             </select>
-            <button onclick="continuarConContraseña()">Continuar</button>
+            <button class="action-button" onclick="continuarConContraseña()">Continuar</button>
         </div>
     </div>
 
@@ -62,8 +97,8 @@
             <h2>Ingresar Contraseña para Registrar Entrada</h2>
             <label for="inputPasswordEntrada">Contraseña:</label>
             <input type="password" id="inputPasswordEntrada" required>
-            <button onclick="verificarContraseñaEntrada()">Aceptar</button>
-            <button onclick="cerrarCardEntrada()">Cancelar</button>
+            <button class="action-button" onclick="verificarContraseñaEntrada()">Aceptar</button>
+            <button class="action-button cancel" onclick="cerrarCardEntrada()">Cancelar</button>
         </div>
     </div>
 
@@ -73,25 +108,61 @@
             <h2>Contraseña para registrar salida</h2>
             <label for="inputPasswordSalida">Contraseña:</label>
             <input type="password" id="inputPasswordSalida" required>
-            <button onclick="verificarContraseñaSalida()">Registrar salida</button>
-            <button onclick="cerrarCardSalida()">Cancelar</button>
+            <button class="action-button" onclick="verificarContraseñaSalida()">Registrar salida</button>
+            <button class="action-button cancel" onclick="cerrarCardSalida()">Cancelar</button>
         </div>
     </div>
-    <!-- Card para ingresar contraseña -->
-<div id="cardContraseñaHistorial" class="card" style="display: none;">
-    <div class="card-content">
-        <h2 style="font-family: Raleway, serif;">Ingrese su contraseña</h2>
-        <label for="inputPasswordHistorial">Contraseña</label>
-        <input type="password" id="inputPasswordHistorial" required>
-        <button onclick="verificarContraseñaHistorial()">Aceptar</button>
-        <button onclick="cerrarCardContraseñaHistorial()">Cancelar</button>
+    
+    <!-- Card de contraseña para tomar descanso -->
+    <div id="cardDescanso" class="card" style="display: none;">
+        <div class="card-content">
+            <h2>Contraseña para tomar descanso</h2>
+            <label for="inputPasswordDescanso">Contraseña:</label>
+            <input type="password" id="inputPasswordDescanso" required>
+            <button class="action-button" onclick="verificarContraseñaDescanso()">Tomar descanso</button>
+            <button class="action-button cancel" onclick="cerrarCardDescanso()">Cancelar</button>
+        </div>
     </div>
-</div>
-<div id="custom-alert" class="custom-alert">
-    <p>Contraseña Incorrecta</p>
-    <button id="close-alert">Cerrar</button>
-</div>
+
+    <!-- Card de contraseña para reanudar jornada -->
+    <div id="cardReanudar" class="card" style="display: none;">
+        <div class="card-content">
+            <h2>Contraseña para reanudar jornada</h2>
+            <label for="inputPasswordReanudar">Contraseña:</label>
+            <input type="password" id="inputPasswordReanudar" required>
+            <button class="action-button" onclick="verificarContraseñaReanudar()">Reanudar jornada</button>
+            <button class="action-button cancel" onclick="cerrarCardReanudar()">Cancelar</button>
+        </div>
+    </div>
+
+    <!-- Card para ingresar contraseña para registrar trabajadores de planta -->
+    <div id="cardPlanta" class="card" style="display: none;">
+        <div class="card-content">
+            <h2>Contraseña para registrar trabajadores de planta</h2>
+            <label for="inputPasswordPlanta">Contraseña:</label>
+            <input type="password" id="inputPasswordPlanta" required>
+            <button class="action-button" onclick="verificarContraseñaPlanta()">Aceptar</button>
+            <button class="action-button cancel" onclick="cerrarCardPlanta()">Cancelar</button>
+        </div>
+    </div>
+
+    <!-- Card para ingresar contraseña de historial -->
+    <div id="cardContraseñaHistorial" class="card" style="display: none;">
+        <div class="card-content">
+            <h2>Ingrese su contraseña</h2>
+            <label for="inputPasswordHistorial">Contraseña</label>
+            <input type="password" id="inputPasswordHistorial" required>
+            <button class="action-button" onclick="verificarContraseñaHistorial()">Aceptar</button>
+            <button class="action-button cancel" onclick="cerrarCardContraseñaHistorial()">Cancelar</button>
+        </div>
+    </div>
+
+    <!-- Alerta personalizada -->
+    <div id="custom-alert" class="custom-alert" style="display: none;">
+        <p>Contraseña Incorrecta</p>
+        <button class="action-button cancel" id="close-alert">Cerrar</button>
+    </div>
+
     <script src="/JS/script.js"></script>
-    <script src="/JS/app.js"></script>
 </body>
 </html>
